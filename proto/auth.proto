@@ -1,0 +1,20 @@
+syntax = "proto3";
+
+package proto;
+
+option go_package = "github.com/nocturna-ta/api-gateway-grpc-lib/proto";
+
+message AuthValidateRequest{
+    map<string, string> headers = 1;
+    string path = 2;
+    string targetService = 3;
+}
+
+message AuthValidateResponse{
+    bool is_valid = 1;
+    map<string, string> explodeHeader = 2;
+}
+
+service AuthService{
+    rpc ValidateAuthorization(AuthValidateRequest) returns (AuthValidateResponse);
+}
